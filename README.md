@@ -5,6 +5,8 @@ Publish Playwright test run on Xray
 This reporter is based in playwright zephyr from Yevhen Laichenkov https://github.com/elaichenkov/playwright-zephyr
 Thanks Yevhen for the great contribution
 
+And forked from https://github.com/inluxc/playwright-xray
+
 ## Install
 
 ```sh
@@ -32,6 +34,7 @@ const config: PlaywrightTestConfig = {
           url: 'https://your-jira-url',
           type: 'cloud',
           apiVersion: '1.0',
+          suffix: '/rest/raven/1.0/import/execution'
         },
         cloud: {
           client_id: '',
@@ -64,9 +67,12 @@ const config: PlaywrightTestConfig = {
           url: 'https://your-jira-url',
           type: 'server',
           apiVersion: '1.0',
+          suffix: '/rest/raven/1.0/import/execution'
         },
         server: {
           token: 'YOUR_SERVER_TOKEN',
+          username: 'somebody@asce.com',
+          token: 'YOUR_JIRA_TOKEN'
         },
         projectKey: 'JIRA_CODE',
         testPlan: 'JIRA_CODEXXXXX',
@@ -105,6 +111,8 @@ const config: PlaywrightTestConfig = {
           url: 'https://your-jira-url',
           type: 'server',
           apiVersion: '1.0',
+          //Optional
+          suffix: '/rest/raven/1.0/import/execution'
         },
         cloud: {
           client_id: '',
@@ -114,6 +122,9 @@ const config: PlaywrightTestConfig = {
         },
         server: {
           token: '',
+          // Optional,
+          username: '',
+          password: ''
         },
         projectKey: 'JIRA_CODE',
         testPlan: 'JIRA_CODE-XXX',

@@ -1,6 +1,6 @@
 {
-  "name": "playwright-xray",
-  "version": "0.6.2",
+  "name": "playwright-xray-mti",
+  "version": "0.0.1",
   "description": "XRAY reporter for the Playwright",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -16,11 +16,12 @@
     "release:patch": "npm run release -- patch",
     "release:minor": "npm run release -- minor",
     "release:major": "npm run release -- major",
-    "format": "prettier --write \"(src|tests)/*.(ts)\""
+    "format": "prettier --write \"(src|tests)/*.(ts)\"",
+    "test": "playwright test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/inluxc/playwright-xray.git"
+    "url": "git+https://github.com/Mictim/playwright-xray.git"
   },
   "keywords": [
     "playwright",
@@ -29,14 +30,14 @@
     "typescript",
     "tools"
   ],
-  "author": "Fúlvio Carvalhido <inluxc@gmail.com>",
+  "author": "Mykhailo Tymoshenko <mictim2002@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/inluxc/playwright-xray/issues"
+    "url": "https://github.com/Mictim/playwright-xray/issues"
   },
-  "homepage": "https://github.com/inluxc/playwright-xray#readme",
+  "homepage": "https://github.com/Mictim/playwright-xray#readme",
   "devDependencies": {
-    "@playwright/test": "^1.30.0",
+    "@playwright/test": "^1.46.1",
     "@types/node": "^20.11.25",
     "prettier": "^2.5.1",
     "release-it": "^17.1.1",

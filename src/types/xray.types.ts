@@ -4,7 +4,8 @@ export interface XrayOptions {
   jira: {
     url: string;
     type: string;
-    apiVersion: string;
+    apiVersion?: string;
+    suffix?:string
   };
   cloud?: {
     client_id?: string;
@@ -12,7 +13,9 @@ export interface XrayOptions {
     xrayUrl?: string;
   };
   server?: {
-    token: string;
+    username?: string,
+    password?: string,
+    token?: string;
   };
   projectKey: string;
   testPlan: string;

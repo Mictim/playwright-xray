@@ -93,11 +93,13 @@ export class XrayService {
         this.xray = options.jira?.url;
 
         // Set Xray Credencials
-        if (!options.server?.token) throw new Error('"server.token" option is missing. Please provide them in the config');
-        this.token = options.server?.token;
+        // if (!options.server?.token) throw new Error('"server.token" option is missing. Please provide them in the config');
+        // this.token = options.server?.token;
 
         // Set Request URL
-        this.requestUrl = this.xray + this.apiVersion !== '1.0' ? `rest/raven/${this.apiVersion}/api` : 'rest/raven/1.0';
+        if (this.options.jira.suffix) {
+          this.requestUrl = this.xray + this.options.jira.suffix
+        } else this.requestUrl = this.xray + this.apiVersion !== '1.0' ? `rest/raven/${this.apiVersion}/api` : 'rest/raven/1.0';
 
         //Create Axios Instance with Auth
         this.axios = axios.create({
@@ -106,8 +108,12 @@ export class XrayService {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${this.token}`,
           },
+          auth: {
+            username: this.options.server?.username ? this.options.server?.username : "",
+            password: this.options.server?.password ? this.options.server?.password : ""
+          }
         });
-
+        console.log(this.axios);
         break;
     }
 
@@ -133,7 +139,7 @@ export class XrayService {
           if (err) throw err;
         });
       }
-    } catch (error) {}
+    } catch (error) { }
     //console.log(results);
     results.tests!.forEach((test: { status: any; testKey: string }) => {
       switch (test.status) {
@@ -161,13 +167,14 @@ export class XrayService {
           if (err) throw err;
         });
       }
-
+      console.log(this.axios)
       const response = await this.axios.post(URL, JSON.stringify(results), {
         maxBodyLength: 107374182400, //100gb
         maxContentLength: 107374182400, //100gb
         timeout: 600000, //10min
-        proxy: this.options.proxy !== undefined ? this.options.proxy : false,
+        proxy: this.options.proxy !== undefined ? this.options.proxy : false
       });
+      console.log(response);
       if (response.status !== 200) throw new Error(`${response.status} - Failed to create test cycle`);
       let key = response.data.key;
       if (this.options.jira.type === 'server') {

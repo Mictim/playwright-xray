@@ -113,7 +113,6 @@ export class XrayService {
             password: this.options.server?.password ? this.options.server?.password : ""
           }
         });
-        console.log(this.axios);
         break;
     }
 

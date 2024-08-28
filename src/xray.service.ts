@@ -167,14 +167,12 @@ export class XrayService {
           if (err) throw err;
         });
       }
-      console.log(this.axios)
       const response = await this.axios.post(URL, JSON.stringify(results), {
         maxBodyLength: 107374182400, //100gb
         maxContentLength: 107374182400, //100gb
         timeout: 600000, //10min
         proxy: this.options.proxy !== undefined ? this.options.proxy : false
       });
-      console.log(response);
       if (response.status !== 200) throw new Error(`${response.status} - Failed to create test cycle`);
       let key = response.data.key;
       if (this.options.jira.type === 'server') {
